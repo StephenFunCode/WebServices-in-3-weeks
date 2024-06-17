@@ -12,7 +12,7 @@ func main() {
 		Timeout: time.Second * 2,
 	}
 
-	req, err := http.NewRequest("GET", "http://localhost:3000/3weeks-go/testGet", nil)
+	req, err := http.NewRequest("GET", "http://localhost:3000/user/example-user", nil)
 	if err != nil {
 		panic(err)
 	}
