@@ -53,8 +53,10 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome"))
 	})
-	r.Put("/user/update", updateUsername)
-	r.Get("/user/{username}", getUsername)
-	r.Post("/user/delete", deleteUsername)
+	r.Route("/user", func(r chi.Router) {
+		r.Put("/update", updateUsername)
+		r.Get("/{username}", getUsername)
+		r.Post("/delete", deleteUsername)
+	})
 	http.ListenAndServe(":3000", r)
 }
