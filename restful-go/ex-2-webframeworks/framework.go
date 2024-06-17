@@ -3,9 +3,10 @@
 
 // to run this exercise:
 // go test -run TestUserEndpoints
-package framework
+package main
 
 import (
+	"github.com/go-chi/chi/middleware"
 	"net/http"
 
 	"github.com/go-chi/chi"
@@ -45,4 +46,15 @@ func deleteUsername(w http.ResponseWriter, r *http.Request) {
 
 	// return response and 200
 	w.Write([]byte("user deleted")) // TODO: return deleted username
+}
+func main() {
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("welcome"))
+	})
+	r.Put("/user/update", updateUsername)
+	r.Get("/user/{username}", getUsername)
+	r.Post("/user/delete", deleteUsername)
+	http.ListenAndServe(":3000", r)
 }
