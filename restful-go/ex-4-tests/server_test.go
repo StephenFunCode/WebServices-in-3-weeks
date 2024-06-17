@@ -35,17 +35,41 @@ func testFailGetUsernameempty(t *testing.T) {
 }
 
 func testPassUpdateUser(t *testing.T) {
-	// TODO: implement
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/updateUsername/captainnobody1", nil)
+	updateUsername(w, req)
+	resp := w.Result()
+	if resp.StatusCode != 200 {
+		t.Errorf("Expected status code 200, got %d", resp.StatusCode)
+	}
 }
 
 func testFailUpdateUsernameempty(t *testing.T) {
-	// TODO: implement
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/updateUsername/", nil)
+	updateUsername(w, req)
+	resp := w.Result()
+	if resp.StatusCode != 400 {
+		t.Errorf("Expected status code 400, got %d", resp.StatusCode)
+	}
 }
 
 func testPassDeleteUser(t *testing.T) {
-	// ToDO: implement
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/deleteUsername/captainnobody1", nil)
+	deleteUsername(w, req)
+	resp := w.Result()
+	if resp.StatusCode != 200 {
+		t.Errorf("Expected status code 200, got %d", resp.StatusCode)
+	}
 }
 
 func testFailDeleteUsernameempty(t *testing.T) {
-	// TODO: implement
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/deleteUsername/", nil)
+	deleteUsername(w, req)
+	resp := w.Result()
+	if resp.StatusCode != 400 {
+		t.Errorf("Expected status code 400, got %d", resp.StatusCode)
+	}
 }
