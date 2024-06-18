@@ -6,12 +6,25 @@
 
 package main
 
-// add driver here
+import (
+	"fmt"
+	"log"
+
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
+)
 
 func main() {
-	connectionString := "/database.db"
-	// TODO: connect to sqlite database here
+	connStr := "postgres://postgres:postgres@localhost:5431/postgres?sslmode=disable"
+	db, err := sqlx.Connect("postgres", connStr)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	// TODO: query the database here
-	db.Close()
+	err = db.Ping()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Println("Successfully connected!")
 }
